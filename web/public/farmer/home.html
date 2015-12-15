@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome to OSM!</title>
+	<link rel="stylesheet" href="stylesheets/materialize.min.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="stylesheets/home.css" />
+</head>
+<body>
+	<div id="header-logo" class="valign-wrapper"><h2 id="logo" class="header valign">Welcome to OSM!</h2></div>
+	<div class="row">
+		<div id="items-display" class="col l9 m8 s7">
+		</div>
+		<div id="shopping-cart" class="col l3 m4 s5">
+			<br />
+			<h4 class="center-align header flow-text">Selling Bay</h4><br />
+			<div id="cart-items"></div>
+			<button id="final-purchase" class="waves-effect btn">Sell</button>
+		</div>
+	</div>
+	<script src="javascripts/jquery-1.11.3.min.js"></script>
+	<script src="javascripts/materialize.min.js"></script>
+	<script src="javascripts/handlebars.runtime-v4.0.5.js"></script>
+	<script src="javascripts/jquery.mockjax.min.js"></script>
+	<script src="templates/homeItems.js"></script>
+	<script src="templates/shoppingCart.js"></script>
+	<script src="javascripts/home.js"></script>
+</body>
+</html>

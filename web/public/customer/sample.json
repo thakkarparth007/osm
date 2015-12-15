@@ -1,0 +1,12 @@
+{ "items": [
+	{
+		"name": "swag",
+		"price": 180.0,
+		"weightAvailable": 140.0
+	},
+	{
+		"name": "penguin",
+		"price": 140.2,
+		"weightAvailable": 160.4
+	}
+]}

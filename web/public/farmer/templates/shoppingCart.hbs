@@ -1,0 +1,10 @@
+{{#each cartItems}}
+	<div class="cart-item row">
+		<div class="cart-item-details col s9">
+			<p class="big">{{this.name}} <span id="delete-button-{{this.name}}" class="delete-button">&times;</span></p>
+			<p class="small">{{this.weight}} kg</p>
+		</div>
+		<div class="col s3">
+		</div>
+	</div>
+{{/each}}

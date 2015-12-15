@@ -1,0 +1,14 @@
+<div class="row">
+	{{#each items}}
+		<div id="item-{{this.name}}" class="item-purchase col l4 m6 s12">
+			<img src="images/{{this.name}}.jpg" class="circle"/>
+			<p class="item-purchase-name">{{this.name}}</p>
+			<p>Rate: {{this.price}}/kg</p><br />
+			<div class="input-field">
+				<input name="weight" type="text"/>
+				<label for="weight">Amount in kg</label>
+			</div><br />
+			<button id="add-to-cart-{{this.name}}" class="add-to-cart waves-effect btn red">Add to bay<i class="material-icons right">shopping_cart</i></button>
+		</div>
+	{{/each}}
+</div>

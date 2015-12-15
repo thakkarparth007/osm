@@ -1,0 +1,155 @@
+function main() {
+	var showLoginButton = document.querySelector("#show-login button");
+	var showRegisterButton = document.querySelector("#show-register button");
+	var showLoginPane = document.getElementById("show-login");
+	var showRegisterPane = document.getElementById("show-register");
+	var loginForm = document.getElementById("login");
+	var registerForm = document.getElementById("register");
+	var fadeTime = 300;
+
+	var passwordInputsRegister = document.querySelectorAll("form#register input[type=\"password\"]");
+	var userNameRegister = document.querySelector("form#register input[name=\"username\"]");
+	var passwordInputLogin = document.querySelector("form#login input[type=\"password\"]");
+	var userNameLogin = document.querySelector("form#login input[name=\"username\"]");
+
+	function showRegisterForm() {
+		showRegisterPane.style.display = "none";
+		showLoginPane.style.display = "block";
+		showRegisterButton.removeEventListener("click", showRegisterForm);
+		loginForm.style.opacity = 1;
+		animate(function (t) {return t;}, fadeTime, function (x) {loginForm.style.opacity = 1 - x;}, function () {
+			loginForm.style.display = "none";
+			registerForm.style.opacity = 0;
+			registerForm.style.display = "block";
+			animate(function (t) {return t;}, fadeTime, function (x) {registerForm.style.opacity = x;}, function () {
+				showLoginButton.addEventListener("click", showLoginForm);
+			});
+		});
+	}
+
+	function showLoginForm() {
+		showLoginPane.style.display = "none";
+		showRegisterPane.style.display = "block";
+		showLoginButton.removeEventListener("click", showLoginForm);
+		registerForm.style.opacity = 1;
+		animate(function (t) {return t;}, fadeTime, function (x) {registerForm.style.opacity = 1 - x;}, function () {
+			registerForm.style.display = "none";
+			loginForm.style.opacity = 0;
+			loginForm.style.display = "block";
+			animate(function (t) {return t;}, fadeTime, function (x) {loginForm.style.opacity = x;}, function () {
+				showRegisterButton.addEventListener("click", showRegisterForm);
+			});
+		});
+	}
+
+	function validatePasswordRegister(event) {
+		if (event.target.validity.patternMismatch)
+			passwordInputsRegister[0].setCustomValidity("Only alphabets, numbers, underscores and periods are allowed");
+		else if (passwordInputsRegister[0].value != passwordInputsRegister[1].value)
+			passwordInputsRegister[1].setCustomValidity("Both passwords should be the same");
+		else {
+			passwordInputsRegister[0].setCustomValidity("");
+			passwordInputsRegister[1].setCustomValidity("");
+		}
+	}
+
+	function validateUserNameRegister(event) {
+		var userName = event.target.value;
+		if (event.target.validity.patternMismatch)
+			event.target.setCustomValidity("Only alphabets, numbers, underscores and periods are allowed");
+		else if (!event.target.validity.patternMismatch) {
+			event.target.setCustomValidity("");
+			var req = new XMLHttpRequest();
+			req.open("GET", "/check?username=" + userName, true);
+			req.addEventListener("load", function() {
+				if (req.status < 400) {
+					console.log("hey");
+					if (req.responseText == "Valid username")
+						event.target.setCustomValidity("");
+					else if (req.responseText == "Empty username")
+						event.target.setCustomValidity("A username is necessary!");
+					else
+						event.target.setCustomValidity("This username has already been taken!");
+				}
+			});
+			req.send(null);
+		}
+	}
+
+	function validateLoginField(event) {
+		if (event.target.validity.patternMismatch)
+			event.target.setCustomValidity("Only alphabets, numbers, underscores and periods are allowed");
+		else
+			event.target.setCustomValidity("");
+	}
+
+	function onLoginSubmit(event) {
+		event.preventDefault();
+		$.post("/api/login/farmer", $("#login").serialize(), function (data) {
+			if (data.api_call_status == "success") {
+				location.href = location.href.replace("login.html", "home.html");
+				return true;
+			}
+			else
+				return false;
+		});
+	}
+
+	function onRegisterSubmit(event) {
+		event.preventDefault();
+		var noob = [], val = {};
+		noob = $("#register").serializeArray();
+		noob.forEach(function (item) {
+			val[item.name] = item.value;
+		});
+		console.log(val);
+		var toSend = {
+			"aadharId": val.aadharId,
+			"password": val.password,
+			"name": val.name,
+			"residentialAddress": {
+				"addr1": val.addr1,
+				"addr2": val.addr2,
+				"village": val.village,
+				"district": val.district,
+				"state": val.state
+			},
+			"farmAddresses": [{
+			"addr1": val.addr1f,
+			"addr2": val.addr2f,
+			"village": val.villagef,
+			"district": val.districtf,
+			"state": val.statef
+			}],
+			"phoneNumber": val.phoneNumber
+		}
+		console.log(toSend);
+		$.post("/api/farmer/register", toSend, function (data) {
+			if (data.api_call_status == "success") {
+				//location.href = location.href.replace("login.html", "home.html");
+				return true;
+			}
+			else
+				return false;
+		});
+	}
+
+	//userNameRegister.addEventListener("keyup", validateUserNameRegister);
+	passwordInputsRegister[0].addEventListener("keyup", validatePasswordRegister);
+	passwordInputsRegister[1].addEventListener("keyup", validatePasswordRegister);
+	showRegisterButton.addEventListener("click", showRegisterForm);
+	userNameLogin.addEventListener("keyup", validateLoginField);
+	passwordInputLogin.addEventListener("keyup", validateLoginField);
+	$("#login").submit(onLoginSubmit);
+	$("#register").submit(onRegisterSubmit);
+}
+/*
+$.mockjax({
+	"url": "/api/login/farmer",
+	"type": "post",
+	"responseText": {
+		"api_call_status": "success"
+	}
+});
+*/
+window.onload = main;

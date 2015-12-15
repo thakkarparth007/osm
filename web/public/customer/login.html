@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Welcome!</title>
+		<link rel="stylesheet" href="stylesheets/materialize.min.css" />
+		<link rel="stylesheet" href="stylesheets/form.css" />
+		<link rel="stylesheet" href="stylesheets/login.css" />
+		<script src="javascripts/animate.js"></script>
+		<script src="javascripts/jquery-1.11.3.min.js"></script>
+		<script src="javascripts/jquery.mockjax.min.js"></script>
+		<script src="javascripts/materialize.min.js"></script>
+		<script src="javascripts/login.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="container-header">
+				<h1>Welcome to OSM!</h1>
+			</div>
+			<div class="container-body">
+				<form id="login">
+					<br />
+					<div class="input-field">
+						<input id="username" type="text" name="username" />
+						<label for="username">Username</label>
+					</div>
+					<div class="input-field">
+						<input id="password" type="password" name="password" />
+						<label for="password">Password</label>
+					</div>
+					<br />
+					<button type="submit">Log In</button>
+					<br />
+				</form>
+				<!--form id="register" action="register/submit" method="post">
+					<br />
+					<div><label class="form-left">Name:</label><input type="text" name="name" class="form-right" max-length="80" required></input></div><br />
+					<div><label class="form-left">Username:</label><input type="text" name="username" class="form-right" max-length="32" pattern="[0-9a-zA-Z._]*" required></input></div><br />
+					<div><label class="form-left">Password:</label><input type="password" name="password" class="form-right" max-length="32" pattern="[0-9a-zA-Z._]*" required></input></div><br />
+					<div><label class="form-left">Confirm password:</label><input type="password" class="form-right" max-length="32" pattern="[0-9a-zA-Z._]*" required></input></div><br />
+					<button type="submit">Register</button>
+				</form-->
+				<form id="register">
+					<br />
+					<div class="input-field">
+						<input id="username" type="text" name="username" />
+						<label for="username">Username</label>
+					</div>
+					<div class="input-field">
+						<input id="name" type="text" name="name" />
+						<label for="name">Full Name</label>
+					</div>
+					<div class="input-field">
+						<input id="password" type="password" name="password" />
+						<label for="password">Password</label>
+					</div>
+					<div class="input-field">
+						<input id="password" type="password" name="password" />
+						<label for="password">Confirm Password</label>
+					</div>
+					<fieldset name="address">
+						<legend>Residential Address</legend>
+						<div class="input-field">
+							<input id="addr1" type="text" name="addr1" />
+							<label for="addr1">Address 1</label>
+						</div>
+						<div class="input-field">
+							<input id="addr2" type="text" name="addr2" />
+							<label for="addr2">Address 2</label>
+						</div>
+						<div class="input-field">
+							<input id="city" type="text" name="city" />
+							<label for="city">City/Town</label>
+						</div>
+						<div class="input-field">
+							<input id="state" type="text" name="state" />
+							<label for="state">State</label>
+						</div>
+					</fieldset>
+					<div class="input-field">
+						<input id="phoneNumber" type="text" name="phoneNumber" />
+						<label for="phoneNumber">Phone number</label>
+					</div><br />
+					<button type="submit">Register</button><br />
+				</form>
+			</div>
+		</div>
+		<div id="show-register" class="container-plain">
+			Don't have an ID?<br />
+			<button>Register!</button>
+		</div>
+		<div id="show-login" class="container-plain">
+			Have an ID?<br />
+			<button>Log In!</button>
+		</div>
+		<br /><br />
+	</body>
+</html>

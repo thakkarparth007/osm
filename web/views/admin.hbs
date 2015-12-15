@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Festember 2015 | SnapChallenge!</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+<body>
+	
+	<div>
+		Festember 2015 presents SnapChallenge!
+		<a href="/snapchallenge/logout">Logout</a>
+	</div>
+
+	<div>Click an image to download it in full size</div>
+
+	<table border="1">
+		<tr>
+			<th>Picture</th>
+			<th>Caption</th>
+			<th>Name</th>
+			<th>Contact</th>
+			<th>College</th>
+		</tr>
+
+		{{#each row}}
+			<tr>
+				<td><img src="/snapchallenge/uploads/{{this.picName}}" width="100px"></td>
+				<td>{{this.caption}}</td>
+				<td>{{this.name}}</td>
+				<td>{{this.contact}}</td>
+				<td>{{this.college}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</body>
+</html>
